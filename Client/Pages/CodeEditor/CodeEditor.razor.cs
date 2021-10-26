@@ -26,7 +26,7 @@ namespace ViWatcher.Client.Pages
         [Inject]
         private IJSRuntime jsRuntime{ get; set; }
         
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
             lblSave = Translater.Instant("Labels.Save");
             lblSaving = Translater.Instant("Labels.Saving");
