@@ -1,0 +1,52 @@
+@namespace FileFlow.Client.Pages
+@using ffFlow = FileFlow.Shared.Models.Flow;
+
+@page "/flows"
+
+<PageView>
+
+    <Head>
+    </Head>
+
+    <Body>
+        <div class="flows page-table first-column-checkbox">
+            <div class="table-toolbar">
+                <button @onclick="@Add"><span class="fas fa-plus"></span> @lblAdd</button>
+                <button @onclick="@Edit" disabled="@(SelectedItems?.Count == 1 ? null : "disabled")"><span c
+                        lass="fas fa-edit"></span>
+                    @lblEdit</button>
+                <button @onclick="@Delete" disabled="@(SelectedItems?.Any() == true ? null : "disabled")"><span
+                        class="fas fa-trash"></span>
+                    @lblDelete</button>
+            </div>
+
+            <RadzenDataGrid @ref="DataGrid" AllowFiltering="true" AllowColumnResize="true" RowDoubleClick=@RowDoubleClicked
+                SelectionMode="DataGridSelectionMode.Multiple" @bind-Value=@SelectedItems
+                FilterMode="FilterMode.Advanced" AllowSorting="true" Data="@Data" TItem="ffFlow"
+                LogicalFilterOperator="LogicalFilterOperator.Or">
+                <Columns>
+                    <RadzenDataGridColumn TItem="ffFlow" Width="40px" Sortable="false" Filterable="false">
+                        <HeaderTemplate>
+                            <RadzenCheckBox TriState="false" TValue="bool"
+                                Value="@(Data.Any(i => SelectedItems != null && SelectedItems.Contains(i)))"
+                                Change="@(args => SelectedItems = args ? Data.ToList() : null)" />
+                        </HeaderTemplate>
+                        <Template Context="data">
+                            <RadzenCheckBox TriState="false"
+                                Value="@(SelectedItems != null && SelectedItems.Contains(data))" />
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="ffFlow" Property="Name" Title="Name" />
+                    <RadzenDataGridColumn TItem="ffFlow" Property="Enabled" Title="Enabled">
+                        <Template Context="item">
+                            <div class="switch-wrapper">
+                                <RadzenSwitch @bind-Value="@item.Enabled" Change="@(args => Enable(args, item))" />
+                            </div>
+                        </Template>
+                    </RadzenDataGridColumn>
+                </Columns>
+            </RadzenDataGrid>
+        </div>
+    </Body>
+
+</PageView>
