@@ -1,8 +1,8 @@
 namespace FileFlow.BasicNodes.File
 {
     using System.ComponentModel;
-    using FileFlow.Plugins;
-    using FileFlow.Plugins.Attributes;
+    using FileFlow.Plugin;
+    using FileFlow.Plugin.Attributes;
 
     public class InputFile : Node
     {
