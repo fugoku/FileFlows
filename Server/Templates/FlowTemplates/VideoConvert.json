@@ -1,8 +1,9 @@
 [
   {
-    "name": "Convert Video Simplified",
+    "name": "Convert Video",
     "description": "Will convert videos to the specified format.   The original file will be replaced.\n\nIf the original file is already format the file will not be re-encoded.",
     "group": "Video",
+    "save": true,
     "parts": [
       {
         "node": "VideoFile",
