@@ -13,7 +13,7 @@ namespace FileFlows.Client.Components.Inputs
         [Parameter]
         public int Min { get => _Min; set => _Min = value; }
         [Parameter]
-        public int Max { get => _Max; set => _Max = value == 0 ? int.MaxValue : Max; }
+        public int Max { get => _Max; set => _Max = value == 0 ? int.MaxValue : value; }
 
         private async Task ChangeValue(ChangeEventArgs e)
         {
