@@ -27,6 +27,11 @@ namespace FileFlows.Server
                     _Instance = new Logger();
                 return _Instance;
             }
+            set
+            {
+                if (value != null)
+                    _Instance = value;
+            }
         }
     }
 }
