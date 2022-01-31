@@ -22,9 +22,8 @@
       {
         "node": "ConvertAudio",
         "uid": "00000000-0000-0000-0000-000000000002",
-        "xPos": 575,
-        "yPos": 190,
-        "outputs": 2,
+        "xPos": 375,
+        "yPos": 180,
         "connections": [
           {
             "input": 1,
@@ -43,11 +42,10 @@
         }
       },
 
-
       {
         "node": "MoveFile",
         "uid": "00000000-0000-0000-0000-000000000003",
-        "xPos": 575,
+        "xPos": 375,
         "yPos": 350,
         "connections": [
           {
@@ -66,7 +64,7 @@
         "node": "Function",
         "name": "Delete Dir?",
         "uid": "00000000-0000-0000-0000-000000000004",
-        "xPos": 575,
+        "xPos": 375,
         "yPos": 480,
         "outputs": 2,
         "connections": [
@@ -83,8 +81,8 @@
       {
         "node": "DeleteSourceDirectory",
         "uid": "00000000-0000-0000-0000-000000000005",
-        "xPos": 350,
-        "yPos": 640,
+        "xPos": 200,
+        "yPos": 620,
         "model": {
           "IfEmpty": true,
           "IncludePatterns": [ "mp3", "aac", "ogg", "flac", "wav" ]
