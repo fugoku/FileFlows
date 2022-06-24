@@ -46,7 +46,7 @@ public partial class HeatMap : ComponentBase, IDisposable
     {
         if (firstRender)
         {
-            jsCharts = await jsRuntime.InvokeAsync<IJSObjectReference>("import", "./scripts/HeatMap.js");
+            jsCharts = await jsRuntime.InvokeAsync<IJSObjectReference>("import", "./scripts/Charts/HeatMap.js");
             await jsCharts.InvokeVoidAsync("newHeatMap", Uid, new
             {
                 this.Url,
