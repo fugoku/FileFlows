@@ -1,4 +1,6 @@
-﻿namespace FileFlows.Client.Components;
+﻿using Microsoft.Extensions.Logging;
+
+namespace FileFlows.Client.Components;
 
 using FileFlows.Shared.Models;
 using Microsoft.AspNetCore.Components;
@@ -9,10 +11,21 @@ using System.Collections.Generic;
 /// </summary>
 public partial class FlowPanel:ComponentBase
 {
+    private List<ElementField> _Fields;
+
     /// <summary>
     /// Gets or sets the fields in the flow panel
     /// </summary>
-    [Parameter] public List<ElementField> Fields { get; set; }
+    [Parameter]
+    public List<ElementField> Fields
+    {
+        get => _Fields;
+        set
+        {
+            _Fields = value;
+            this.StateHasChanged();
+        }
+    }
 
     /// <summary>
     /// Gets or sets the Editor this flow panel is used in
@@ -75,4 +88,11 @@ public partial class FlowPanel:ComponentBase
     /// Get the name of the type this editor is editing
     /// </summary>
     protected string TypeName => Editor.TypeName;
+
+    public void SetFields(List<ElementField> fields)
+    {
+        Logger.Instance.ILog("Setting fields", fields);
+        this._Fields = fields;
+        this.StateHasChanged();
+    }
 }
