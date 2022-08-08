@@ -3,7 +3,7 @@ using FileFlows.Shared.Models;
 namespace FileFlows.Shared.Widgets;
 
 /// <summary>
-/// Widget for Video Containres
+/// Widget for Video Containers
 /// </summary>
 public class VideoContainers:WidgetDefinition
 {
