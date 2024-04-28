@@ -5,24 +5,51 @@ using FileFlows.Client.Components.Common;
 
 namespace FileFlows.Client.Components;
 
+/// <summary>
+/// Browser for Plugins
+/// </summary>
 public partial class PluginBrowser : ComponentBase
 {
+    /// <summary>
+    /// The URL to get the Plugins
+    /// </summary>
     const string ApiUrl = "/api/plugin";
+    /// <summary>
+    /// Gets or sets the blocker
+    /// </summary>
     [CascadingParameter] public Blocker Blocker { get; set; }
+    /// <summary>
+    /// Gets or sets the editor
+    /// </summary>
     [CascadingParameter] public Editor Editor { get; set; }
-
+    /// <summary>
+    /// Gets or sets the table
+    /// </summary>
     public FlowTable<PluginPackageInfo> Table { get; set; }
-
+    /// <summary>
+    /// Gets or sets if this is visible
+    /// </summary>
     public bool Visible { get; set; }
-
+    /// <summary>
+    /// If this has been updated
+    /// </summary>
     private bool Updated;
-
+    /// <summary>
+    /// The translated labels
+    /// </summary>
     private string lblTitle, lblClose;
 
+    /// <summary>
+    /// The open task to complete when closing
+    /// </summary>
     TaskCompletionSource<bool> OpenTask;
-
+    /// <summary>
+    /// If the components needs rendering
+    /// </summary>
     private bool _needsRendering = false;
-
+    /// <summary>
+    /// If this component is loading
+    /// </summary>
     private bool Loading = false;
 
     /// <inheritdoc />
@@ -75,6 +102,9 @@ public partial class PluginBrowser : ComponentBase
         }
     }
 
+    /// <summary>
+    /// Waits for the component to render
+    /// </summary>
     private async Task WaitForRender()
     {
         _needsRendering = true;
@@ -85,6 +115,9 @@ public partial class PluginBrowser : ComponentBase
         }
     }
 
+    /// <summary>
+    /// Closes the component
+    /// </summary>
     private void Close()
     {
         OpenTask.TrySetResult(Updated);
@@ -124,6 +157,9 @@ public partial class PluginBrowser : ComponentBase
         await LoadData();
     }
 
+    /// <summary>
+    /// When the view button is clicked
+    /// </summary>
     private async Task ViewAction()
     {
         var item = Table.GetSelected().FirstOrDefault();
@@ -131,6 +167,10 @@ public partial class PluginBrowser : ComponentBase
             await View(item);
     }
 
+    /// <summary>
+    /// Views the item
+    /// </summary>
+    /// <param name="plugin">the item</param>
     private async Task View(PluginPackageInfo plugin)
     {
         await Editor.Open(new () { TypeName = "Pages.Plugins", Title = plugin.Name, Fields = new List<ElementField>
