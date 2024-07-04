@@ -19,9 +19,15 @@ public partial class Reporting
     /// <param name="rd">the report definition</param>
     private Task Launch(ReportDefinition rd)
         => Edit(rd);
-    
+
     /// <inheritdoc />
-    public override async Task<bool> Edit(ReportDefinition rd)
+    public override Task<bool> Edit(ReportDefinition rd)
+    {
+        NavigationManager.NavigateTo($"/report/{rd.Uid}");
+        return Task.FromResult(true);
+    }
+
+    private async Task<bool> EditOld(ReportDefinition rd)
     {
         // clone the fields as they get wiped
         var fields = new List<ElementField>();
